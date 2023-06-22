@@ -12,8 +12,6 @@ int main()
 {
 	initializeScreen();
 
-	ioH(WIDTH, HEIGHT);
-
 	int age;
 
 	while (1)
@@ -27,4 +25,6 @@ void initializeScreen()
 	clearScreen();
 
 	makeWindow(1, 1, WIDTH, HEIGHT);
+
+	ioH(WIDTH, HEIGHT);
 }
