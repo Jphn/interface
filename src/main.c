@@ -9,13 +9,16 @@
 
 void gotoxy(int x, int y);
 void clearScreen();
+
 void fillInterval(int xInitial, int xFinal, int yInitial, int yFinal);
 void makeWindow(int x, int y, int X, int Y);
 void initializeScreen();
-void input(int x, int y, int width, int height, char *label);
-void inputInt(int *var, char *label);
 
-int width = 100, height = 20, intInputY = 2, intInputX = 2;
+void input(int width, int height, char *label);
+void inputInt(int *var, char *label);
+void inputFloat(float *var, char *label);
+
+int wWidth = 100, wHeight = 20, inputY = 2, inputX = 2, maxInputWidth = 0;
 
 int main()
 {
@@ -86,29 +89,42 @@ void initializeScreen()
 {
 	clearScreen();
 
-	makeWindow(1, 1, width, height);
+	makeWindow(1, 1, wWidth, wHeight);
 }
 
-void input(int x, int y, int width, int height, char *label)
+void input(int width, int height, char *label)
 {
-	makeWindow(x, y, x + width, y + ++height);
+	++height;
 
-	gotoxy(x + 1, y + 1);
+	if (width > maxInputWidth)
+		maxInputWidth = width;
+
+	if (inputY + height > wHeight)
+	{
+		inputY = 2;
+
+		inputX += maxInputWidth + 1;
+	}
+
+	makeWindow(inputX, inputY, inputX + width, inputY + height);
+
+	gotoxy(inputX + 1, inputY + 1);
 
 	printf("%s", label);
+
+	inputY += height + 1;
 }
 
 void inputInt(int *var, char *label)
 {
-	if (intInputY >= height)
-	{
-		intInputY = 2;
-		intInputX += 22;
-	}
-
-	input(intInputX, intInputY, 17, 1, label);
-
-	intInputY += 3;
+	input(17, 1, label);
 
 	scanf("%d", var);
+}
+
+void inputFloat(float *var, char *label)
+{
+	input(17, 1, label);
+
+	scanf("%f", var);
 }
