@@ -1,14 +1,14 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include "./modules/utils.h"
 
 #define FILL_V printf("-")
 #define FILL_H printf("|")
 
 #define CORNER printf("+")
 
-void gotoxy(int x, int y);
-void clearScreen();
+#define WIDTH 100
+#define HEIGHT 20
 
 void fillInterval(int xInitial, int xFinal, int yInitial, int yFinal);
 void makeWindow(int x, int y, int X, int Y);
@@ -18,7 +18,7 @@ void input(int width, int height, char *label);
 void inputInt(int *var, char *label);
 void inputFloat(float *var, char *label);
 
-int wWidth = 100, wHeight = 20, inputY = 2, inputX = 2, maxInputWidth = 0;
+int inputY = 2, inputX = 2, maxInputWidth = 0;
 
 int main()
 {
@@ -32,33 +32,26 @@ int main()
 	return 0;
 }
 
-void gotoxy(int x, int y) { printf("\033[%d;%dH", y, x); }
-
-void clearScreen()
-{
-	system("clear");
-}
-
 void fillInterval(int xInitial, int xFinal, int yInitial, int yFinal)
 {
 	for (int i = xInitial + 1; i < xFinal; i++)
 	{
-		gotoxy(i, yInitial);
+		gotoXY(i, yInitial);
 
 		FILL_V;
 
-		gotoxy(i, yFinal);
+		gotoXY(i, yFinal);
 
 		FILL_V;
 	}
 
 	for (int i = yInitial + 1; i < yFinal; i++)
 	{
-		gotoxy(xInitial, i);
+		gotoXY(xInitial, i);
 
 		FILL_H;
 
-		gotoxy(xFinal, i);
+		gotoXY(xFinal, i);
 
 		FILL_H;
 	}
@@ -66,19 +59,19 @@ void fillInterval(int xInitial, int xFinal, int yInitial, int yFinal)
 
 void makeWindow(int x, int y, int X, int Y)
 {
-	gotoxy(x, y);
+	gotoXY(x, y);
 
 	CORNER;
 
-	gotoxy(X, y);
+	gotoXY(X, y);
 
 	CORNER;
 
-	gotoxy(x, Y);
+	gotoXY(x, Y);
 
 	CORNER;
 
-	gotoxy(X, Y);
+	gotoXY(X, Y);
 
 	CORNER;
 
@@ -89,7 +82,7 @@ void initializeScreen()
 {
 	clearScreen();
 
-	makeWindow(1, 1, wWidth, wHeight);
+	makeWindow(1, 1, WIDTH, HEIGHT);
 }
 
 void input(int width, int height, char *label)
@@ -99,7 +92,7 @@ void input(int width, int height, char *label)
 	if (width > maxInputWidth)
 		maxInputWidth = width;
 
-	if (inputY + height > wHeight)
+	if (inputY + height > HEIGHT)
 	{
 		inputY = 2;
 
@@ -108,7 +101,7 @@ void input(int width, int height, char *label)
 
 	makeWindow(inputX, inputY, inputX + width, inputY + height);
 
-	gotoxy(inputX + 1, inputY + 1);
+	gotoXY(inputX + 1, inputY + 1);
 
 	printf("%s", label);
 
