@@ -1,6 +1,7 @@
 #include "./io.h"
 
 #include <stdio.h>
+#include <string.h>
 #include "./utils.h"
 #include "./window.h"
 
@@ -15,6 +16,8 @@ void ioH(int maxX, int maxY)
 void input(int width, int height, char *label)
 {
 	++height;
+
+	width += strlen(label) + 1;
 
 	if (width > maxInputWidth)
 		maxInputWidth = width;
