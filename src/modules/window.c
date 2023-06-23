@@ -32,19 +32,19 @@ void makeWindow(int x, int y, int X, int Y)
 {
 	gotoXY(x, y);
 
-	CORNER;
+	CORNER_LU;
 
 	gotoXY(X, y);
 
-	CORNER;
+	CORNER_RU;
 
 	gotoXY(x, Y);
 
-	CORNER;
+	CORNER_LD;
 
 	gotoXY(X, Y);
 
-	CORNER;
+	CORNER_RD;
 
 	fillInterval(x, X, y, Y);
 }
