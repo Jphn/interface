@@ -1,3 +1,20 @@
+# COLORS
+BOLD = "\e[1m"
+REGULAR = "\e[0m"
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+PURPLE = "\033[35m"
+CYAN = "\033[36m"
+WHITE = "\033[37m"
+
+# FUNCTIONS
+define p_echo
+	@echo $(GREEN)$(BOLD)$(1)$(REGULAR)
+endef
+
+
 # COMPILER
 CC = gcc
 WFLAGS = -Wall -Wextra -Werror
@@ -15,7 +32,7 @@ TARGET = main
 
 # COMPILE MAIN FILE
 $(BIN)/$(TARGET): $(DEPENDECIES)
-	@echo "[COMPILING ALL]"
+	$(call p_echo,"[COMPILING ALL]")
 
 	$(CC) $(WFLAGS) \
 	$(OBJ)/*.o \
@@ -25,7 +42,7 @@ $(BIN)/$(TARGET): $(DEPENDECIES)
 
 # CREATE DIST FOLDERS
 $(DIST)/:
-	@echo "[CREATING DIST FOLDERS]"
+	$(call p_echo,"[CREATING DIST FOLDERS]")
 
 	mkdir $(DIST)/ $(BIN)/ $(OBJ)/
 
@@ -33,7 +50,7 @@ $(DIST)/:
 
 # COMPILE MODULES
 $(OBJ)/%.o: $(MODULES)/%.h $(MODULES)/%.c
-	@echo "[COMPILING MODULE] $*"
+	$(call p_echo,"[COMPILING MODULE] $*")
 
 	$(CC) $(WFLAGS) -c \
 	$(MODULES)/$*.c
@@ -45,7 +62,7 @@ $(OBJ)/%.o: $(MODULES)/%.h $(MODULES)/%.c
 
 # COMPILE main
 $(OBJ)/main.o: $(SOURCE)/main.c
-	@echo "[COMPILING MAIN]"
+	$(call p_echo,"[COMPILING MAIN]")
 
 	$(CC) $(WFLAGS) -c \
 	$(SOURCE)/main.c
@@ -57,7 +74,7 @@ $(OBJ)/main.o: $(SOURCE)/main.c
 
 # CLEAN
 clean:
-	@echo "[CLEANING OBJECTS]"
+	$(call p_echo,"[CLEANING OBJECTS]")
 
 	rm -rf \
 	$(OBJ)/*.o
@@ -66,7 +83,7 @@ clean:
 
 # HARDCLEAN
 hardclean:
-	@echo "[CLEANING ALL DIST STUFF]"
+	$(call p_echo,"[CLEANING ALL DIST STUFF]")
 
 	rm -r \
 	$(DIST)/
@@ -75,7 +92,7 @@ hardclean:
 
 # RUN CODE
 run: $(BIN)/$(TARGET)
-	@echo "[RUNNING $(TARGET)]"
+	$(call p_echo,"[RUNNING] $(TARGET)")
 	
 	$(BIN)/$(TARGET)
 
@@ -83,4 +100,4 @@ run: $(BIN)/$(TARGET)
 
 # TEST
 test:
-	@echo "$(DEPENDECIES)"
+	$(call p_echo,"Hello")
