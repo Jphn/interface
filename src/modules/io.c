@@ -27,6 +27,8 @@ void input(int width, int height, char *label)
 		inputY = 2;
 
 		inputX += maxInputWidth + 1;
+
+		maxInputWidth = 0;
 	}
 
 	makeWindow(inputX, inputY, inputX + width, inputY + height);
