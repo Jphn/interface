@@ -49,6 +49,8 @@ void inputInt(int *var, inputLocation location)
 	gotoXY(location.x, location.y);
 
 	scanf("%d", var);
+
+	getchar();
 }
 
 void inputFloat(float *var, inputLocation location)
@@ -56,4 +58,15 @@ void inputFloat(float *var, inputLocation location)
 	gotoXY(location.x, location.y);
 
 	scanf("%f", var);
+
+	getchar();
+}
+
+void inputString(char *var, inputLocation location)
+{
+	gotoXY(location.x, location.y);
+
+	scanf("%[^\n]s", var);
+
+	getchar();
 }
