@@ -2,6 +2,7 @@
 #include "./modules/utils.h"
 #include "./modules/window.h"
 #include "./modules/io.h"
+#include "./modules/colorize.h"
 
 #define WIDTH 100
 #define HEIGHT 20
@@ -12,10 +13,15 @@ int main()
 {
 	initializeScreen();
 
-	int age;
+	int age, year;
 
-	while (1)
-		inputInt(&age, "Idade: ");
+	inputLocation inputs[2];
+
+	inputs[0] = input(2, 1, "Idade: ");
+	inputs[1] = input(4, 1, "Ano: ");
+
+	inputInt(&age, inputs[0]);
+	inputInt(&year, inputs[1]);
 
 	return 0;
 }
