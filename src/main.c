@@ -7,21 +7,32 @@
 #define WIDTH 100
 #define HEIGHT 20
 
+typedef struct Person
+{
+	char name[30];
+	int age;
+	char email[50];
+} person;
+
 void initializeScreen();
 
 int main()
 {
 	initializeScreen();
 
-	int age, year;
+	person user;
 
-	inputLocation inputs[2];
+	inputLocation inputs[3];
 
-	inputs[0] = input(2, 1, "Idade: ");
-	inputs[1] = input(4, 1, "Ano: ");
+	inputs[0] = input(30, 1, "Nome: ");
+	inputs[1] = input(2, 1, "Idade: ");
+	inputs[2] = input(40, 1, "Email: ");
 
-	inputInt(&age, inputs[0]);
-	inputInt(&year, inputs[1]);
+	inputString(user.name, inputs[0]);
+	inputInt(&user.age, inputs[1]);
+	inputString(user.email, inputs[2]);
+
+	printf("Nome: %s\nIdade: %d\nEmail: %s", user.name, user.age, user.email);
 
 	return 0;
 }
