@@ -13,8 +13,10 @@ void ioH(int maxX, int maxY)
 	wHeight = maxY;
 };
 
-void input(int width, int height, char *label)
+inputLocation input(int width, int height, char *label)
 {
+	inputLocation thisInput = {inputX + strlen(label) + 1, inputY + 1};
+
 	++height;
 
 	width += strlen(label) + 1;
@@ -35,21 +37,23 @@ void input(int width, int height, char *label)
 
 	gotoXY(inputX + 1, inputY + 1);
 
-	printf("%s", label);
+	puts(label);
 
 	inputY += height + 1;
+
+	return thisInput;
 }
 
-void inputInt(int *var, char *label)
+void inputInt(int *var, inputLocation location)
 {
-	input(17, 1, label);
+	gotoXY(location.x, location.y);
 
 	scanf("%d", var);
 }
 
-void inputFloat(float *var, char *label)
+void inputFloat(float *var, inputLocation location)
 {
-	input(17, 1, label);
+	gotoXY(location.x, location.y);
 
 	scanf("%f", var);
 }
