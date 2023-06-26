@@ -11,7 +11,7 @@ typedef struct InputLocation
 
 void ioH(int maxX, int maxY);
 
-inputLocation input(int width, int height, char *label);
+inputLocation input(int width, char *label);
 void inputInt(int *var, inputLocation location);
 void inputFloat(float *var, inputLocation location);
 void inputString(char *var, inputLocation location);

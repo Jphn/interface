@@ -13,18 +13,16 @@ void ioH(int maxX, int maxY)
 	wHeight = maxY;
 };
 
-inputLocation input(int width, int height, char *label)
+inputLocation input(int width, char *label)
 {
 	inputLocation thisInput = {inputX + strlen(label) + 1, inputY + 1};
-
-	++height;
 
 	width += strlen(label) + 1;
 
 	if (width > maxInputWidth)
 		maxInputWidth = width;
 
-	if (inputY + height > wHeight)
+	if (inputY + 2 > wHeight)
 	{
 		inputY = 2;
 
@@ -33,13 +31,13 @@ inputLocation input(int width, int height, char *label)
 		maxInputWidth = 0;
 	}
 
-	makeWindow(inputX, inputY, inputX + width, inputY + height);
+	makeWindow(inputX, inputY, inputX + width, inputY + 2);
 
 	gotoXY(inputX + 1, inputY + 1);
 
 	puts(label);
 
-	inputY += height + 1;
+	inputY += 3;
 
 	return thisInput;
 }
