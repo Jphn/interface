@@ -5,39 +5,41 @@
 #include "./utils.h"
 #include "./window.h"
 
-int inputY = 2, inputX = 2, maxInputWidth = 0;
+int Y = 2, X = 2, maxInputWidth = 0;
 
 void ioH(int maxX, int maxY)
 {
 	wWidth = maxX;
 	wHeight = maxY;
+	Y = 2;
+	X = 2;
 };
 
 inputLocation input(int width, char *label)
 {
-	inputLocation thisInput = {inputX + strlen(label) + 1, inputY + 1};
+	inputLocation thisInput = {X + strlen(label) + 1, Y + 1};
 
 	width += strlen(label) + 1;
 
 	if (width > maxInputWidth)
 		maxInputWidth = width;
 
-	if (inputY + 2 > wHeight)
+	if (Y + 2 > wHeight)
 	{
-		inputY = 2;
+		Y = 2;
 
-		inputX += maxInputWidth + 1;
+		X += maxInputWidth + 1;
 
 		maxInputWidth = 0;
 	}
 
-	makeWindow(inputX, inputY, inputX + width, inputY + 2);
+	makeWindow(X, Y, X + width, Y + 2);
 
-	gotoXY(inputX + 1, inputY + 1);
+	gotoXY(X + 1, Y + 1);
 
 	puts(label);
 
-	inputY += 3;
+	Y += 3;
 
 	return thisInput;
 }
@@ -67,4 +69,11 @@ void inputString(char *var, inputLocation location)
 	scanf("%[^\n]s", var);
 
 	getchar();
+}
+
+void output(char *message)
+{
+	gotoXY(X, Y++);
+
+	puts(message);
 }

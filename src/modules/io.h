@@ -1,7 +1,7 @@
 #ifndef IO_H
 #define IO_H
 
-int wWidth, wHeight, inputY, inputX, maxInputWidth;
+int wWidth, wHeight, Y, X, maxInputWidth;
 
 typedef struct InputLocation
 {
@@ -15,5 +15,7 @@ inputLocation input(int width, char *label);
 void inputInt(int *var, inputLocation location);
 void inputFloat(float *var, inputLocation location);
 void inputString(char *var, inputLocation location);
+
+void output(char *message);
 
 #endif
