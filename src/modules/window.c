@@ -1,6 +1,7 @@
 #include "./window.h"
 
 #include <stdio.h>
+#include <string.h>
 #include "./utils.h"
 
 void fillInterval(int xInitial, int xFinal, int yInitial, int yFinal)
@@ -47,4 +48,15 @@ void makeWindow(int x, int y, int X, int Y)
 	CORNER_RD;
 
 	fillInterval(x, X, y, Y);
+
+	gotoXY(2, 2);
+}
+
+void resizeTerminal(int width, int height)
+{
+	char command[50];
+
+	sprintf(command, "\x1b[8;%d;%dt", height, width);
+
+	fputs(command, stdout);
 }

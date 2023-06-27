@@ -11,5 +11,6 @@
 
 void fillInterval(int xInitial, int xFinal, int yInitial, int yFinal);
 void makeWindow(int x, int y, int X, int Y);
+void resizeTerminal(int width, int height);
 
 #endif
